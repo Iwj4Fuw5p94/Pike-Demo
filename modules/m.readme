@@ -1,0 +1,10 @@
+group create → deploy inside existing RG
+sub create → create/manage resource groups
+mg create → management group level
+tenant create → tenant-wide deployment
+
+
+az deployment group create `                                                                                 
+>> --resource-group rg-enterprise-dev `
+>> --template-file "D:\Vs code\Pike_project _practice\main.bicep" `
+>> --parameters "D:\Vs code\Pike_project _practice\dev.bicepparam"

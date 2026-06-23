@@ -6,7 +6,7 @@ param adminPassword string
 param tags object
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: 'enterprise-kv-0023'
+  name: 'enterprise-kv-0024'
   location: location
   tags: tags
 
@@ -24,6 +24,17 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     enabledForDeployment: true
     enabledForTemplateDeployment: true
     enabledForDiskEncryption: true
+      enablePurgeProtection: true
+
+      // for security
+  softDeleteRetentionInDays: 90
+
+  publicNetworkAccess: 'Disabled'
+
+  networkAcls: {
+    bypass: 'AzureServices'
+    defaultAction: 'Deny'
+  }
   }
 }
 
@@ -33,7 +44,10 @@ resource secret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
 
   properties: {
     value: adminPassword
+    contentType: 'Password'
+    
   }
+  
 }
 
 output keyVaultId string = keyVault.id

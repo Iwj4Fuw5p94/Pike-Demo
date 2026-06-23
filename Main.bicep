@@ -1,5 +1,3 @@
-targetScope = 'resourceGroup'
-
 param location string = resourceGroup().location
 param environment string
 param vmName string
@@ -42,7 +40,7 @@ module vnet './modules/networking/vnet.bicep' = {
 // KEY VAULT
 //
 module keyVault './modules/security/keyvault.bicep' = {
-  name: 'kvDeploy'
+  name: 'kvDeploys'
   params: {
     location: location
     adminPassword: adminPassword
@@ -50,7 +48,7 @@ module keyVault './modules/security/keyvault.bicep' = {
   }
 }
 
-//
+
 // VM
 //
 module vm './modules/compute/vm.bicep' = {
@@ -69,26 +67,64 @@ module vm './modules/compute/vm.bicep' = {
   ]
 }
 
-module vm2 './modules/compute/vm.bicep' = {
-  name: 'vmDeploy02'
+// module vm2 './modules/compute/vm.bicep' = {
+//   name: 'vmDeploy02'
 
-  params: {
-    location: location
-    vmName: 'appvm02'
-    subnetId: vnet.outputs.subnetId
-    adminUsername: adminUsername
-    adminPassword: adminPassword
-    tags: tags
-  }
-}
+//   params: {
+//     location: location
+//     vmName: 'appvm02'
+//     subnetId: vnet.outputs.subnetId
+//     adminUsername: adminUsername
+//     adminPassword: adminPassword
+//     tags: tags
+//   }
+// }
 
 //
 // ALERT
 //
-module alert './modules/monitoring/alert.bicep' = {
-  name: 'alertDeploy'
+// module alert './modules/monitoring/alert.bicep' = {
+//   name: 'alertDeploy'
+//   params: {
+//     vmId: vm.outputs.vmId
+//   }
+// }
+
+// route table 
+// Route Table
+// Route Table (module reference)
+// targetScope = 'resourceGroup'
+
+// param location string = resourceGroup().location
+
+module routeTable './modules/routing/routeTable.bicep' = {
+  name: 'routeTableDeployment'
+
   params: {
-    vmId: vm.outputs.vmId
+    routeTableName: 'rt-dev-001'
+    location: location
+
+    disableBgpRoutePropagation: false
+
+    routes: [
+      {
+        name: 'default-route'
+
+        properties: {
+          addressPrefix: '0.0.0.0/0'
+          nextHopType: 'VirtualAppliance'
+          nextHopIpAddress: '10.0.0.4'
+        }
+      }
+      {
+        name: 'internal-route'
+
+        properties: {
+          addressPrefix: '10.1.0.0/16'
+          nextHopType: 'VnetLocal'
+        }
+      }
+    ]
   }
 }
 

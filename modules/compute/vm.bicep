@@ -4,7 +4,7 @@ param vmName string
 param adminUsername string
 
 @secure()
-param adminPassword string
+param adminPassword string 
 
 param tags object
 
@@ -65,6 +65,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
 
     securityProfile: {
       securityType: 'TrustedLaunch'
+      encryptionAtHost: true
     }
 
     networkProfile: {
@@ -75,6 +76,17 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       ]
     }
   }
+}
+// for security
+resource amaextention 'Microsoft.Compute/virtualMachines/extensions@2024-03-01' = {
+  name: 'AzureMonitorWindowsAgent'
+  parent: vm
+    properties: {
+    publisher: 'Microsoft.Azure.Monitor'
+    type: 'AzureMonitorWindowsAgent'
+    typeHandlerVersion: '1.0'
+  }
+
 }
 
 output vmId string = vm.id
