@@ -50,21 +50,21 @@ module keyVault './modules/security/keyvault.bicep' = {
 
 // VM
 //
-module vm './modules/compute/vm.bicep' = {
-  name: 'vmDeploy'
-  params: {
-    location: location
-    vmName: vmName
-    subnetId: vnet.outputs.subnetId
-    adminUsername: adminUsername
-    adminPassword: adminPassword
-    tags: tags
-  }
+// module vm './modules/compute/vm.bicep' = {
+//   name: 'vmDeploy'
+//   params: {
+//     location: location
+//     vmName: vmName
+//     subnetId: vnet.outputs.subnetId
+//     adminUsername: adminUsername
+//     adminPassword: adminPassword
+//     tags: tags
+//   }
 
-  dependsOn: [
-    keyVault
-  ]
-}
+//   dependsOn: [
+//     keyVault
+//   ]
+// }
 
 // module vm2 './modules/compute/vm.bicep' = {
 //   name: 'vmDeploy02'
