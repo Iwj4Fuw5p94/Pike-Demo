@@ -2,9 +2,8 @@ param location string = resourceGroup().location
 param environment string
 param vmName string
 param adminUsername string
-
 @secure()
-param adminPassword string = ''
+param adminPassword string 
 
 var tags = {
   Environment: environment
@@ -24,9 +23,9 @@ module nsg './modules/networking/nsg.bicep' = {
   }
 }
 
-//
+
 // VNET
-//
+
 module vnet './modules/networking/vnet.bicep' = {
   name: 'vnetDeploy'
   params: {
@@ -36,9 +35,9 @@ module vnet './modules/networking/vnet.bicep' = {
   }
 }
 
-//
+
 // KEY VAULT
-//
+
 module keyVault './modules/security/keyvault.bicep' = {
   name: 'kvDeploys'
   params: {
