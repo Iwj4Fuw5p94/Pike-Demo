@@ -23,4 +23,4 @@ jobs:
           az deployment group create \
             --resource-group rg-hexaware-dev6 \
             --template-file main.bicep \
-            --parameters environments/dev.bicepparam
+            --parameters dev.bicepparam
