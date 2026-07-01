@@ -1,4 +1,4 @@
-using './main.bicep'
+using './Main.bicep'
 
 param environment = 'dev'
 param vmName = 'dev-vm'
