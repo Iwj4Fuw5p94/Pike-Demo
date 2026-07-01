@@ -96,7 +96,7 @@ module vm './modules/compute/vm.bicep' = {
 
 // param location string = resourceGroup().location
 
-module routeTable './modules/routing/routeTable.bicep' = {
+module routeTable './modules/routing/routetable.bicep' = {
   name: 'routeTableDeployment'
 
   params: {
