@@ -1,9 +1,12 @@
-param location string = resourceGroup().location
+// param location string = resourceGroup().location
+
+param location string
 param environment string
 param vmName string
 param adminUsername string
 @secure()
 param adminPassword string 
+param rgname string
 
 var tags = {
   Environment: environment
@@ -11,11 +14,24 @@ var tags = {
   Project: 'LandingZone'
 }
 
+
+module rgmodule './modules/resourcegroup.bicep' = {
+  name: 'rgmodule'
+  scope: subscription()
+  params: {
+    rgname: rgname
+    location: location
+  }
+}
 //
 // NSG
 //
 module nsg './modules/networking/nsg.bicep' = {
   name: 'nsgDeploy'
+  scope: resourceGroup(rgname)
+  dependsOn: [
+    rgmodule
+  ]
   params: {
     location: location
     nsgName: '${vmName}-nsg'
