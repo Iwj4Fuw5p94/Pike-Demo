@@ -1,5 +1,5 @@
 // param location string = resourceGroup().location
-
+targetScope = 'subscription'
 param location string
 param environment string
 param vmName string
