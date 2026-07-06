@@ -38,14 +38,14 @@ module vnet './modules/networking/vnet.bicep' = {
 
 // KEY VAULT
 
-module keyVault './modules/security/keyvault.bicep' = {
-  name: 'kvDeploys'
-  params: {
-    location: location
-    adminPassword: adminPassword
-    tags: tags
-  }
-}
+// module keyVault './modules/security/keyvault.bicep' = {
+//   name: 'kvDeploys'
+//   params: {
+//     location: location
+//     adminPassword: adminPassword
+//     tags: tags
+//   }
+// }
 
 
 // VM
