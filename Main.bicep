@@ -35,6 +35,8 @@ module vnet './modules/networking/vnet.bicep' = {
   }
 }
 // demo
+// demo2
+
 
 
 // KEY VAULT
