@@ -63,7 +63,7 @@ module vnet2 './modules/networking/vnet.bicep' = {
     mgmodule
   ]
   params: {
-    vnetName: 'enterprise-vnet'
+    vnetName: 'enterprise-vnet02'
     subnetname: 'app-subnet02'
     location: location
     nsgId: nsg.outputs.nsgId
