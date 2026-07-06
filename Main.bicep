@@ -56,6 +56,20 @@ module vnet './modules/networking/vnet.bicep' = {
     tags: tags
   }
 }
+module vnet2 './modules/networking/vnet.bicep' = {
+  name: 'vnetDeploy02'
+  scope: resourceGroup(rgname)
+  dependsOn: [
+    mgmodule
+  ]
+  params: {
+    vnetName: 'enterprise-vnet'
+    subnetname: 'app-subnet02'
+    location: location
+    nsgId: nsg.outputs.nsgId
+    tags: tags
+  }
+}
 // demo
 // demo2
 
