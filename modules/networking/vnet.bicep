@@ -1,9 +1,11 @@
 param location string
 param nsgId string
+param subnetname string
+param vnetName string
 param tags object
 
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
-  name: 'enterprise-vnet'
+  name: vnetName
   location: location
   tags: tags
 
@@ -16,7 +18,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
 
     subnets: [
       {
-        name: 'app-subnet'
+        name: subnetname
 
         properties: {
           addressPrefix: '10.0.1.0/24'
