@@ -20,7 +20,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy Bicep
         run: |
-          az deployment group create \
-            --resource-group rg-hexaware-dev6 \
+          az deployment sub create \
+            --location eastus \
             --template-file Main.bicep \
             --parameters dev.bicepparam
