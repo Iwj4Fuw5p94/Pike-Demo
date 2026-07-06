@@ -15,8 +15,8 @@ var tags = {
 }
 
 
-module rgmodule './modules/resourcegroup.bicep' = {
-  name: 'rgmodule'
+module mgmodule './modules/resourcegroup.bicep' = {
+  name: 'mgmodule'
   scope: subscription()
   params: {
     rgname: rgname
@@ -30,7 +30,7 @@ module nsg './modules/networking/nsg.bicep' = {
   name: 'nsgDeploy'
   scope: resourceGroup(rgname)
   dependsOn: [
-    rgmodule
+    mgmodule
   ]
   params: {
     location: location
@@ -44,6 +44,10 @@ module nsg './modules/networking/nsg.bicep' = {
 
 module vnet './modules/networking/vnet.bicep' = {
   name: 'vnetDeploy'
+  scope: resourceGroup(rgname)
+  dependsOn: [
+    mgmodule
+  ]
   params: {
     location: location
     nsgId: nsg.outputs.nsgId
@@ -117,6 +121,10 @@ module vnet './modules/networking/vnet.bicep' = {
 
 module routeTable './modules/routing/routetable.bicep' = {
   name: 'routeTableDeployment'
+  scope: resourceGroup(rgname)
+  dependsOn: [
+    mgmodule
+  ]
 
   params: {
     routeTableName: 'rt-dev-001'
