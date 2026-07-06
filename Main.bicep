@@ -26,50 +26,50 @@ module mgmodule './modules/resourcegroup.bicep' = {
 //
 // NSG
 //
-module nsg './modules/networking/nsg.bicep' = {
-  name: 'nsgDeploy'
-  scope: resourceGroup(rgname)
-  dependsOn: [
-    mgmodule
-  ]
-  params: {
-    location: location
-    nsgName: '${vmName}-nsg'
-    tags: tags
-  }
-}
+// module nsg './modules/networking/nsg.bicep' = {
+//   name: 'nsgDeploy'
+//   scope: resourceGroup(rgname)
+//   dependsOn: [
+//     mgmodule
+//   ]
+//   params: {
+//     location: location
+//     nsgName: '${vmName}-nsg'
+//     tags: tags
+//   }
+// }
 
 
 // VNET
 
-module vnet './modules/networking/vnet.bicep' = {
-  name: 'vnetDeploy'
-  scope: resourceGroup(rgname)
-  dependsOn: [
-    mgmodule
-  ]
-  params: {
-    vnetName: 'enterprise-vnet'
-    subnetname: 'app-subnet'
-    location: location
-    nsgId: nsg.outputs.nsgId
-    tags: tags
-  }
-}
-module vnet2 './modules/networking/vnet.bicep' = {
-  name: 'vnetDeploy02'
-  scope: resourceGroup(rgname)
-  dependsOn: [
-    mgmodule
-  ]
-  params: {
-    vnetName: 'enterprise-vnet02'
-    subnetname: 'app-subnet02'
-    location: location
-    nsgId: nsg.outputs.nsgId
-    tags: tags
-  }
-}
+// module vnet './modules/networking/vnet.bicep' = {
+//   name: 'vnetDeploy'
+//   scope: resourceGroup(rgname)
+//   dependsOn: [
+//     mgmodule
+//   ]
+//   params: {
+//     vnetName: 'enterprise-vnet'
+//     subnetname: 'app-subnet'
+//     location: location
+//     nsgId: nsg.outputs.nsgId
+//     tags: tags
+//   }
+// }
+// module vnet2 './modules/networking/vnet.bicep' = {
+//   name: 'vnetDeploy02'
+//   scope: resourceGroup(rgname)
+//   dependsOn: [
+//     mgmodule
+//   ]
+//   params: {
+//     vnetName: 'enterprise-vnet02'
+//     subnetname: 'app-subnet02'
+//     location: location
+//     nsgId: nsg.outputs.nsgId
+//     tags: tags
+//   }
+// }
 // demo
 // demo2
 
