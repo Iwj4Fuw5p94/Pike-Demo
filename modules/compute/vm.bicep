@@ -64,6 +64,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
     }
 
 
+
     networkProfile: {
       networkInterfaces: [
         {

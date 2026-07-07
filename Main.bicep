@@ -94,7 +94,27 @@ module vnet './modules/networking/vnet.bicep' = {
 
 // VM
 //
-module vm './modules/compute/vm.bicep' = {
+// module vm './modules/compute/vm.bicep' = {
+//   name: 'vmDeploy'
+//   scope: resourceGroup(rgname)
+//   dependsOn: [
+//     mgmodule
+//   ]
+//   params: {
+//     location: location
+//     vmName: vmName
+//     subnetId: vnet.outputs.subnetId
+//     adminUsername: adminUsername
+//     adminPassword: adminPassword
+//     tags: tags
+//   }
+
+// }
+
+
+// VM Module
+//
+module vm2 './modules/compute/vm.bicep' = {
   name: 'vmDeploy'
   scope: resourceGroup(rgname)
   dependsOn: [
@@ -108,7 +128,6 @@ module vm './modules/compute/vm.bicep' = {
     adminPassword: adminPassword
     tags: tags
   }
-
 }
 
 // module vm2 './modules/compute/vm.bicep' = {
