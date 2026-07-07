@@ -63,10 +63,6 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       }
     }
 
-    securityProfile: {
-      securityType: 'TrustedLaunch'
-      encryptionAtHost: true
-    }
 
     networkProfile: {
       networkInterfaces: [
