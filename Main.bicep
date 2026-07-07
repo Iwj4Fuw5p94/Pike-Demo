@@ -21,23 +21,28 @@ module mgmodule './modules/resourcegroup.bicep' = {
   params: {
     rgname: rgname
     location: location
+
   }
 }
 //
 // NSG
 //
-// module nsg './modules/networking/nsg.bicep' = {
-//   name: 'nsgDeploy'
-//   scope: resourceGroup(rgname)
-//   dependsOn: [
-//     mgmodule
-//   ]
-//   params: {
-//     location: location
-//     nsgName: '${vmName}-nsg'
-//     tags: tags
-//   }
-// }
+module nsg './modules/networking/nsg.bicep' = {
+  name: 'nsgDeploy'
+  scope: resourceGroup(rgname)
+  dependsOn: [
+    mgmodule
+  ]
+  params: {
+    location: location
+    nsgName: '${vmName}-nsg'
+    tags: {
+      Environment: environment
+      Owner: 'CloudTeam'
+      Project: 'LandingZone'
+    }
+  }
+}
 
 
 // VNET
