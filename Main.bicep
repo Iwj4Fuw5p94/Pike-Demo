@@ -26,6 +26,7 @@ module mgmodule './modules/resourcegroup.bicep' = {
 }
 //
 // NSG
+// test
 //
 module nsg './modules/networking/nsg.bicep' = {
   name: 'nsgDeploy'
